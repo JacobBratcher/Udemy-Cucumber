@@ -1,0 +1,9 @@
+package cucumberOptions; 
+
+import .CucumberOptions;
+
+@io.cucumber.junit.CucumberOptions(features="src/test/java/features",
+glue="stepDefinitons", monochrome=true)
+public class TestNGRunner extends AbstractTestNGCucumberTests {
+
+}
