@@ -12,8 +12,8 @@ import io.cucumber.java.en.When;
 
 public class greenKartStepDefinitions {
 public WebDriver driver; 
-private String productName; 
-private String topDealsProductName; 
+public String productName; 
+public String topDealsProductName; 
 
 	@Given("User is on GreenCart landing page")
 	public void user_is_on_green_cart_landing_page() throws InterruptedException {
@@ -28,6 +28,7 @@ private String topDealsProductName;
 	public void user_searched_for_short_name_and_extracted_the_actual_name_of_the_product(String shortName) {
 
 		driver.findElement(By.xpath("//input[@type='search'")).sendKeys(shortName);
+		Thread.sleep(2500);
 		String productName = driver.findElement(By.cssSelector("h4.product-name")).getText().split("-")[0].trim();
 		System.out.println(productName + " is extracted from the search"); 
 	}
@@ -42,6 +43,7 @@ private String topDealsProductName;
 		String childWindow = i1.nect();
 		driver.switchTo().window(childWindow);
 		driver.findElement(By.xpath("//input[@type='search'")).sendKeys(shortName);
+		Thread.sleep(2500);
 		String topDealsproductName = driver.findElement(By.cssSelector("tr td:nth-child(1)")).getText();
 		System.out.println(topDealsProductName + " is extracted from the top deals search"); 
 		
