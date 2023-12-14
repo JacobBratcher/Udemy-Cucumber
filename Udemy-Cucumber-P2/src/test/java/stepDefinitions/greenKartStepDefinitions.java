@@ -32,11 +32,17 @@ private String topDealsProductName;
 		System.out.println(productName + " is extracted from the search"); 
 	}
 	
-	@Then("User searches for same short name in offersd page to check if the product exists")
+	@Then("User searches for same short name in offers page to check if the product exists")
 	public void user_searches_for_same_short_name_in_offersd_page_to_check_if_the_product_exists() {
 
-		driver.findElement(By.xpath("//a[normalize-space()='Top Deals']")).click();
-		String topDealsProductName = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div/div/div/div/table/tbody/tr/td[1]")).getText();
+		driver.findElement(By.linkText("Top Deals").click();
+		Set <String> s1 = driver.getWindowHandles();
+		Iterator <String> i1 = s1.iterator();
+		String parentWindow = i1.next();
+		String childWindow = i1.nect();
+		driver.switchTo().window(childWindow);
+		driver.findElement(By.xpath("//input[@type='search'")).sendKeys(shortName);
+		String topDealsproductName = driver.findElement(By.cssSelector("tr td:nth-child(1)")).getText();
 		System.out.println(topDealsProductName + " is extracted from the top deals search"); 
 		
 	}
@@ -44,12 +50,6 @@ private String topDealsProductName;
 	@Then("It is verified that both pages display the same product when searching with a short name")
 	public void it_is_verified_that_both_pages_display_the_same_product_when_searching_with_a_short_name() {
 	
-		boolean shortNameSearchMatch = productName.equals(topDealsProductName);
-		if (shortNameSearchMatch == true) {
-			assertEquals("Product names do match", productName, topDealsProductName);
-		}
-		else {
-		assertEquals("Product names do not match", productName, topDealsProductName);
-		}	
+		Assert.assertEwquals(topDealsProductName, productName);
 	}
 }
